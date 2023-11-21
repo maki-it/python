@@ -17,13 +17,13 @@ jobs:
           config-inline: |
             [registry."git.prod.maki-it.de"]
       - name: Login to Gitea Registry
-       uses: docker/login-action@v3
-       with:
-         registry: git.prod.maki-it.de
-         username: ${{ CI_USER }}
-         password: ${{ CI_TOKEN }}
-      #- name: Login to Gitea Container Registry
-      #  run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de
+        uses: docker/login-action@v3
+        with:
+          registry: git.prod.maki-it.de
+          username: ${{ CI_USER }}
+          password: ${{ CI_TOKEN }}
+          #- name: Login to Gitea Container Registry
+          #  run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de
       - name: Build and push Docker image
         uses: https://github.com/docker/build-push-action@v5
         with:
