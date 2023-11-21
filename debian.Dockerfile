@@ -1,6 +1,6 @@
 FROM python:3.12-bookworm
 
-ARG USER=appuser
+ARG USERNAME=appuser
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
 
