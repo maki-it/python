@@ -18,9 +18,9 @@ jobs:
       - name: Login to Gitea Registry
         uses: docker/login-action@v2
         with:
-          registry: https://git.prod.maki-it.de
-          username: ${{ CI_USER }}
-          password: ${{ CI_TOKEN }}
+          registry: git.prod.maki-it.de
+          username: $CI_USER
+          password: $CI_TOKEN
       - name: Build and push Docker image
         uses: https://github.com/docker/build-push-action@v5
         with:
