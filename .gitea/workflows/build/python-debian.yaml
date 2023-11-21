@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout
         uses: https://github.com/actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v3
         with:
@@ -21,5 +23,8 @@ jobs:
         with:
           context: .
           file: ./debian.Dockerfile
+          platforms: |
+            linux/amd64
+            linux/arm64  
           push: true
           tags: "git.prod.maki-it.de/${{ gitea.repository }}:${{gitea.sha}},git.prod.maki-it.de/${{ gitea.repository }}:latest,git.prod.maki-it.de/${{ gitea.repository }}:debian"
