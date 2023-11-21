@@ -18,6 +18,6 @@ jobs:
         uses: https://github.com/docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: ./debian.Dockerfile
           push: true
-          tags: "git.prod.maki-it.de/${{ gitea.repository }}:${{gitea.sha}},git.prod.maki-it.de/${{ gitea.repository }}:latest"
+          tags: "git.prod.maki-it.de/${{ gitea.repository }}:${{gitea.sha}},git.prod.maki-it.de/${{ gitea.repository }}:latest,git.prod.maki-it.de/${{ gitea.repository }}:debian"
