@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     if: gitea.ref == 'refs/heads/main'
     steps:
-      - name: Env var test
         run: echo "$CI_USER: $CI_TOKEN"
       - name: Checkout
         uses: https://github.com/actions/checkout@v4
