@@ -19,7 +19,7 @@ jobs:
         with:
           registry: git.prod.maki-it.de
           username: ${{ CI_USER }}
-          password: ${{ CI_TOKEN }}
+          password: ${{ secrets.CI_TOKEN }}
           #- name: Login to Gitea Container Registry
           #  run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de
       - name: Build and push Docker image
