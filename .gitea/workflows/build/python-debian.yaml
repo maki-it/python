@@ -23,6 +23,9 @@ jobs:
         with:
           context: .
           file: ./debian.Dockerfile
+          build-args: |
+            BASE_NAME=${{gitea.repository}}:debian
+            BASE_DIGEST=${{gitea.sha}}
           platforms: |
             linux/amd64
             linux/arm64  
