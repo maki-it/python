@@ -22,9 +22,9 @@ FROM base as runtime
 
 ARG BASE_NAME \
     GIT_COMMIT_SHA \
-    USERNAME='appuser'
+    USERNAME='appuser' \
+    USER_UID=1001
 
-ARG USER_UID=1001
 ARG USER_GID=${USER_UID}
 ARG APP_DIR='/app'
 
