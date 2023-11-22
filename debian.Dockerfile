@@ -12,7 +12,7 @@ FROM base as runtime
 LABEL org.opencontainers.image.title="Python base image" \
       org.opencontainers.image.description="Python on Debian base image with non-root user" \
       org.opencontainers.image.authors="Maki IT <kontakt@maki-it.de>" \
-      org.opencontainers.image.version="${PYTHON_VERSION}"
+      org.opencontainers.image.version="${PYTHON_VERSION}" \
       org.opencontainers.image.source="https://git.prod.maki-it.de/base-images/python"
 
 ENV TZ=Europe/Berlin
