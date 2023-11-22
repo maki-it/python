@@ -19,8 +19,8 @@ RUN pip install --prefix=/install -r requirements.txt
 
 FROM base as runtime
 
-ARG BASE_NAME \
-    GIT_COMMIT_SHA \
+ARG BASE_NAME= \
+    GIT_COMMIT_SHA= \
     USERNAME=appuser \
     USER_UID=1001 \
     USER_GID=$USER_UID \
