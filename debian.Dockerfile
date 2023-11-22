@@ -8,7 +8,8 @@ FROM python:3.12-slim as base
 ENV LANG C.UTF-8 \
     LC_ALL C.UTF-8 \
     PYTHONDONTWRITEBYTECODE 1 \
-    PYTHONFAULTHANDLER 1
+    PYTHONFAULTHANDLER 1 \
+    TZ=Europe/Berlin
 
 FROM base as python-deps
 
@@ -33,8 +34,6 @@ LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.source="https://git.prod.maki-it.de/base-images/python" \ 
       de.maki-it.image.base.digest=${GIT_COMMIT_SHA} \
       de.maki-it.image.base.name=${BASE_NAME}
-
-ENV TZ=Europe/Berlin
 
 WORKDIR $APP_DIR
 
