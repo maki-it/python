@@ -15,18 +15,21 @@ LABEL org.opencontainers.image.title="Python base image" \
       org.opencontainers.image.version="${PYTHON_VERSION}" \
       org.opencontainers.image.source="https://git.prod.maki-it.de/base-images/python"
 
-ENV TZ=Europe/Berlin
-
-WORKDIR /app
 
 ARG USERNAME=appuser
 ARG USER_UID=1001
 ARG USER_GID=$USER_UID
+ARG APP_DIR='/app'
+
+ENV TZ=Europe/Berlin
+
+WORKDIR $APP_DIR
 
 COPY --from=python-deps /install /usr/local
 
 RUN groupadd --gid $USER_GID $USERNAME &&  \
-    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
+    chown --recursive $USER_UID:$USER_GID $APP_DIR
     
     # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
     #apt-get update && \
