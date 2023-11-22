@@ -25,7 +25,7 @@ jobs:
           file: ./debian.Dockerfile
           build-args: |
             BASE_NAME=${{gitea.repository}}:debian
-            BASE_DIGEST=${{gitea.sha}}
+            GIT_COMMIT_SHA=${{gitea.sha}}
           platforms: |
             linux/amd64
             linux/arm64  

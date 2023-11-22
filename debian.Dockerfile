@@ -20,14 +20,14 @@ RUN pip install --prefix=/install -r requirements.txt
 FROM base as runtime
 
 ARG BASE_NAME \
-    BASE_DIGEST
+    GIT_COMMIT_SHA
 
 LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.description="Python on Debian base image with non-root user" \
       de.maki-it.image.base.authors="Maki IT <kontakt@maki-it.de>" \
       de.maki-it.image.base.version="${PYTHON_VERSION}" \
       de.maki-it.image.base.source="https://git.prod.maki-it.de/base-images/python" \ 
-      de.maki-it.image.base.digest=${BASE_DIGEST} \
+      de.maki-it.image.base.digest=${GIT_COMMIT_SHA} \
       de.maki-it.image.base.name=${BASE_NAME}
 
 
