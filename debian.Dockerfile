@@ -24,7 +24,7 @@ ARG BASE_NAME \
     GIT_COMMIT_SHA \
     APP_DIR='/app'
     USERNAME='appuser' \
-    USER_UID=1001 \
+    USER_UID=1001
     
 # Must be in own ARG for use with arg variable
 ARG USER_GID=${USER_UID}
