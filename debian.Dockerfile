@@ -21,9 +21,9 @@ RUN pip install --prefix=/install -r requirements.txt
 FROM base as runtime
 
 ARG BASE_NAME \
-    GIT_COMMIT_SHA
+    GIT_COMMIT_SHA \
+    USERNAME='appuser'
 
-ARG USERNAME='appuser'
 ARG USER_UID=1001
 ARG USER_GID=${USER_UID}
 ARG APP_DIR='/app'
