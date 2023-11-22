@@ -26,8 +26,7 @@ ARG USER_GID=$USER_UID
 COPY --from=python-deps /install /usr/local
 
 RUN groupadd --gid $USER_GID $USERNAME &&  \
-    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
-    python3 -m pip install -r 
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
     
     # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
     #apt-get update && \
