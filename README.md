@@ -6,9 +6,9 @@ Docker Python base image
 
 | Distro 	| Tags               	|
 |--------	|--------------------	|
-| Debian 	| `latest`, `debian` 	|
+| Debian 	| `latest`, `debian`, `<commit sha>` 	|
 
 # Non-root User
 This image runs with a non-root User:
 - Name: `appuser` 
-- UID and GUID: `1001`
+- UID and GUID: `12321`
