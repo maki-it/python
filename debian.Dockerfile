@@ -5,10 +5,10 @@ FROM python:3.12-slim as base
 
 # TODO Test performance if PYTHONDONTWRITEBYTECODE should be used
 
-ENV LANG C.UTF-8 \
-    LC_ALL C.UTF-8 \
-    PYTHONDONTWRITEBYTECODE 1 \
-    PYTHONFAULTHANDLER 1 \
+ENV LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONFAULTHANDLER=1 \
     TZ=Europe/Berlin
 
 FROM base as python-deps
