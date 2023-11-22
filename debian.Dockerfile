@@ -22,11 +22,12 @@ FROM base as runtime
 
 ARG BASE_NAME \
     GIT_COMMIT_SHA \
+    APP_DIR='/app'
     USERNAME='appuser' \
     USER_UID=1001 \
-    USER_GID=${USER_UID}
     
-ARG APP_DIR='/app'
+# Must be in own ARG for use with arg variable
+ARG USER_GID=${USER_UID}
 
 LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.description="Python on Debian base image with non-root user" \
