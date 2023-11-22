@@ -1,5 +1,15 @@
 FROM python:3.12-slim as base
 
+# PYTHONDONTWRITEBYTECODE: Prevents Python from writing pyc files to disc (equivalent to python -B option) -> https://docs.python.org/3/using/cmdline.html#cmdoption-B
+# PYTHONUNBUFFERED: Prevents Python from buffering stdout and stderr (equivalent to python -u -> https://docs.python.org/3/using/cmdline.html#cmdoption-u
+
+# TODO Test performance if PYTHONDONTWRITEBYTECODE should be used
+
+ENV LANG C.UTF-8 \
+    LC_ALL C.UTF-8 \
+    PYTHONDONTWRITEBYTECODE 1 \
+    PYTHONFAULTHANDLER 1
+
 FROM base as python-deps
 
 COPY requirements.txt /requirements.txt
