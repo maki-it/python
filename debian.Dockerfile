@@ -24,7 +24,7 @@ ARG BASE_NAME='' \
     GIT_COMMIT_SHA='' \
     USERNAME=appuser \
     USER_UID=1001 \
-    USER_GID=$USER_UID \
+    USER_GID=${USER_UID} \
     APP_DIR='/app'
 
 LABEL de.maki-it.image.base.title="Python base image" \
@@ -35,18 +35,18 @@ LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.digest=${GIT_COMMIT_SHA} \
       de.maki-it.image.base.name=${BASE_NAME}
 
-WORKDIR $APP_DIR
+WORKDIR ${APP_DIR}
 
 COPY --from=python-deps /install /usr/local
 
-RUN groupadd --gid $USER_GID $USERNAME &&  \
-    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
-    chown --recursive $USER_UID:$USER_GID $APP_DIR
+RUN groupadd --gid ${USER_GID} ${USERNAME} &&  \
+    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} && \
+    chown --recursive ${USER_UID}:${USER_GID} ${APP_DIR}
     
     # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
     #apt-get update && \
     #&& apt-get install -y sudo \
-    #echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME && \
-    #chmod 0440 /etc/sudoers.d/$USERNAME
+    #echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} && \
+    #chmod 0440 /etc/sudoers.d/${USERNAME}
 
-USER $USERNAME
+USER ${USERNAME}
