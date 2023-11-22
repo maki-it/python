@@ -19,11 +19,16 @@ RUN pip install --prefix=/install -r requirements.txt
 
 FROM base as runtime
 
-LABEL org.opencontainers.image.title="Python base image" \
-      org.opencontainers.image.description="Python on Debian base image with non-root user" \
-      org.opencontainers.image.authors="Maki IT <kontakt@maki-it.de>" \
-      org.opencontainers.image.version="${PYTHON_VERSION}" \
-      org.opencontainers.image.source="https://git.prod.maki-it.de/base-images/python"
+ARG BASE_NAME \
+    BASE_DIGEST
+
+LABEL org.opencontainers.image.base.title="Python base image" \
+      org.opencontainers.image.base.description="Python on Debian base image with non-root user" \
+      org.opencontainers.image.base.authors="Maki IT <kontakt@maki-it.de>" \
+      org.opencontainers.image.base.version="${PYTHON_VERSION}" \
+      org.opencontainers.image.base.source="https://git.prod.maki-it.de/base-images/python" \ 
+      org.opencontainers.image.base.digest=${BASE_DIGEST} \
+      org.opencontainers.image.base.name=${BASE_IMAGE}
 
 
 ARG USERNAME=appuser
