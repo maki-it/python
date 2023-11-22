@@ -20,7 +20,11 @@ RUN pip install --prefix=/install -r requirements.txt
 FROM base as runtime
 
 ARG BASE_NAME \
-    GIT_COMMIT_SHA
+    GIT_COMMIT_SHA \
+    USERNAME=appuser \
+    USER_UID=1001 \
+    USER_GID=$USER_UID \
+    APP_DIR='/app'
 
 LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.description="Python on Debian base image with non-root user" \
@@ -29,12 +33,6 @@ LABEL de.maki-it.image.base.title="Python base image" \
       de.maki-it.image.base.source="https://git.prod.maki-it.de/base-images/python" \ 
       de.maki-it.image.base.digest=${GIT_COMMIT_SHA} \
       de.maki-it.image.base.name=${BASE_NAME}
-
-
-ARG USERNAME=appuser
-ARG USER_UID=1001
-ARG USER_GID=$USER_UID
-ARG APP_DIR='/app'
 
 ENV TZ=Europe/Berlin
 
