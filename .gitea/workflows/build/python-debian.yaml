@@ -40,15 +40,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: git.prod.maki-it.de/${{ gitea.repository }}
-        flavor: |
-          prefix=debian,onlatest=true
+        flavor: prefix=debian
         tags: |
-          type=raw,value=debian
-          type=ref,event=branch,prefix=debian
-          type=ref,event=pr,prefix=debian
-          type=semver,pattern={{version}},prefix=debian
-          type=semver,pattern={{major}}.{{minor}},prefix=debian
-          type=semver,pattern={{major}},enable=${{ !startsWith(gitea.ref, 'refs/tags/0.') }},prefix=debian
+          type=raw,enable=true,priority=1,value=debian
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}},enable=${{ !startsWith(gitea.ref, 'refs/tags/0.') }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
