@@ -44,7 +44,7 @@ jobs:
             latest=auto
             prefix='debian'
           tags: |
-            type=raw
+            type=raw,value=''
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
