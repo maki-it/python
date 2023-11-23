@@ -40,7 +40,10 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: git.prod.maki-it.de/${{ gitea.repository }}
+        flavor: |
+          prefix=debian,onlatest=true
         tags: |
+          type=raw,enable=true,priority=200,prefix=,suffix=,value=debian
           type=ref,event=branch
           type=ref,event=pr
           type=semver,pattern={{version}}
@@ -59,8 +62,8 @@ jobs:
             linux/amd64
             linux/arm64  
           push: ${{ gitea.event_name != 'pull_request' }}
-          tags: 
-            ${{ steps.meta.outputs.tags }}
-            git.prod.maki-it.de/${{ gitea.repository }}:${{gitea.sha}}
-            git.prod.maki-it.de/${{ gitea.repository }}:latest
-            git.prod.maki-it.de/${{ gitea.repository }}:debian
+          # tags: 
+          #   ${{ steps.meta.outputs.tags }}
+          #   git.prod.maki-it.de/${{ gitea.repository }}:${{gitea.sha}}
+          #   git.prod.maki-it.de/${{ gitea.repository }}:latest
+          #   git.prod.maki-it.de/${{ gitea.repository }}:debian
