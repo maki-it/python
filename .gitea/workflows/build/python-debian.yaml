@@ -42,9 +42,9 @@ jobs:
           images: git.prod.maki-it.de/${{ gitea.repository }}
           flavor: |
             latest=auto
-            prefix=debian
+            prefix='debian-'
           tags: |
-            type=raw,value=debian
+            type=raw,value=debian,prefix=''
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
