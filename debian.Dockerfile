@@ -32,8 +32,8 @@ ARG BASE_NAME \
 # Must be in own ARG for use with arg variable
 ARG USER_GID=${USER_UID}
 
-LABEL de.maki-it.image.base.title="Python base image" \
-      de.maki-it.image.base.description="Python on Debian base image with non-root user" \
+LABEL de.maki-it.image.base.title="Python ${PYTHON_VERSION} on Debian" \
+      de.maki-it.image.base.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
       de.maki-it.image.base.authors="Maki IT <kontakt@maki-it.de>" \
       de.maki-it.image.base.version="${PYTHON_VERSION}" \
       de.maki-it.image.base.revision=${REVISION} \
