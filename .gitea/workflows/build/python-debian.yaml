@@ -41,14 +41,14 @@ jobs:
         with:
           images: git.prod.maki-it.de/${{ gitea.repository }}
           flavor: |
-            latest=auto 
+            latest=auto
           tags: |
             type=raw,value=debian
-            type=ref,event=branch,prefix=debian
-            type=ref,event=pr,prefix=debian
-            type=semver,pattern={{version}},prefix=debian
-            type=semver,pattern={{major}}.{{minor}},prefix=debian
-            type=semver,pattern={{major}},enable=${{ !startsWith(gitea.ref, 'refs/tags/0.') }},prefix=debian
+            type=ref,event=branch,prefix=debian-
+            type=ref,event=pr,prefix=debian-
+            type=semver,pattern={{version}},prefix=debian-
+            type=semver,pattern={{major}}.{{minor}},prefix=debian-
+            type=semver,pattern={{major}},enable=${{ !startsWith(gitea.ref, 'refs/tags/0.') }},prefix=debian-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
