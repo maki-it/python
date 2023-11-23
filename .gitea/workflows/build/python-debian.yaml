@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: git.prod.maki-it.de/${{ gitea.repository }}
+          images: ${{ gitea.server_url }}/${{ gitea.repository }}
           flavor: |
             latest=auto
           tags: |
@@ -57,7 +57,10 @@ jobs:
           file: ./debian.Dockerfile
           build-args: |
             BASE_NAME=${{gitea.repository}}:debian
-            GIT_COMMIT_SHA=${{gitea.sha}}
+            BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            SOURCE_URL=${{ gitea.server_url }}/${{ gitea.repository }}
           platforms: |
             linux/amd64
             linux/arm64  
