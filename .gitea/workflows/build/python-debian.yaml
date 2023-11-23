@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ gitea.server_url }}/${{ gitea.repository }}
+          images: ${{ gitea.server }}/${{ gitea.repository }}
           flavor: |
             latest=auto
           tags: |
