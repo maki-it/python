@@ -1,12 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
   ],
   "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Dependency Dashboard",
-  "labels": [
-    "Kind/Dependency"
+  "dependencyDashboardTitle": "Renovate Dashboard",
+  "labels": ["Kind/Dependency"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "reviewers": ["team:base-images/Owners"]
+    }
   ],
-  "timezone": "Europe/Berlin"
+  "platformAutomerge": true
 }
