@@ -8,11 +8,11 @@
   "labels": ["Kind/Dependency"],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["patch", "pin", "digest"],
       "automerge": true
     },
     {
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": ["major", "minor"],
       "reviewers": ["team:base-images/Owners"]
     }
   ],
