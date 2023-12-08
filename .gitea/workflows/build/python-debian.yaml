@@ -2,8 +2,6 @@ name: Build Python Image
 run-name: ${{ gitea.actor }} builds new python docker image
 on:
   push:
-    schedule:
-      - cron: '0 7 * * *'
     branches:
       - main
     tags:
