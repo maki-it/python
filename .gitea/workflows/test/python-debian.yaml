@@ -1,27 +1,23 @@
 name: Test Python Image
 run-name: ${{ gitea.actor }} tests new python docker image
 on:
-  push:
-    pull_request:
-      types:
-        - opened
-        - reopened
-        - ready_for_review
-        - edited
-      branches:
-        - 'main'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+      - edited
+    branches:
+      - 'main'
     paths-ignore:
       - README.md
       - .gitignore
       - .editorconfig
       #- .gitea/**
       - .vscode/**
-  # pull_request:
-  #   branches:
-  #     - main
 
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-docker
     steps:
       - name: Checkout
@@ -39,13 +35,14 @@ jobs:
       - name: Login to Gitea Container Registry
         run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de     
 
-      - name: Build and export to Docker
+      - name: Build and export to local Docker
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./debian.Dockerfile
           load: true
           tags: test
-      - name: Test
+
+      - name: Test Docker image
         run: |
           docker run --rm test       
