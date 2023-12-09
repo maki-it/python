@@ -5,8 +5,7 @@ on:
     types:
       - opened
       - reopened
-      - ready_for_review
-      - edited
+      - synchronize
     branches:
       - 'main'
     paths-ignore:
@@ -35,7 +34,7 @@ jobs:
       - name: Login to Gitea Container Registry
         run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de     
 
-      - name: Build and export to local Docker
+      - name: Build local Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -45,4 +44,4 @@ jobs:
 
       - name: Test Docker image
         run: |
-          docker run --rm test       
+          docker run --rm test python -V 
