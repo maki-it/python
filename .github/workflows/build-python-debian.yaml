@@ -12,8 +12,10 @@ jobs:
     outputs:
       version: ${{ steps.get-python-version.outputs.version }}
     steps:
+      - uses: actions/checkout@v4
       - name: Extract Python Version from Dockerfile
         id: get-python-version
+        shell: bash
         run: |
           ls -l
           echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT" || exit -1
