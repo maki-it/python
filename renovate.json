@@ -1,20 +1,6 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ],
-  "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Dependency Dashboard",
-  "labels": ["Kind/Dependency"],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["patch", "pin", "digest"],
-      "automerge": true
-    },
-    {
-      "matchUpdateTypes": ["major", "minor"],
-      "reviewers": ["team:base-images/Owners"]
-    }
-  ],
-  "platformAutomerge": true
+    "github>maki-it/renovate-config:default.json5",
+    "github>maki-it/renovate-config:lang-python.json5"
+  ]
 }
