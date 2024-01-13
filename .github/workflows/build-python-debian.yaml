@@ -49,10 +49,8 @@ jobs:
         with:
           images: |
             ${{ env.REGISTRY }}/maki-it/python
-
-          flavor: |
-            latest=true,
           tags: |
+            type=raw,value=latest
             type=raw,value=debian
             type=raw,prefix=debian-,value=${{ env.MAJOR }}
             type=raw,prefix=debian-,value=${{ env.MAJOR }}.${{ env.MINOR }}
