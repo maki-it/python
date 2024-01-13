@@ -1,5 +1,9 @@
 # python-base
 
+[![Build Python Image](https://github.com/maki-it/python/actions/workflows/build-python-debian.yaml/badge.svg?branch=main)](https://github.com/maki-it/python/actions/workflows/build-python-debian.yaml)
+
+[![Test Python Image](https://github.com/maki-it/python/actions/workflows/test-python-debian.yaml/badge.svg)](https://github.com/maki-it/python/actions/workflows/test-python-debian.yaml)
+
 Docker Python base image
 
 ## Available Versions and Tags
