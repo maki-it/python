@@ -15,6 +15,7 @@ jobs:
       - name: Extract Python Version from Dockerfile
         id: get-python-version
         run: |
+          ls -l
           echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT" || exit -1
 
   debug_info:
