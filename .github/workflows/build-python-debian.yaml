@@ -7,6 +7,7 @@ on:
 
 jobs:
   get_python_version:
+    name: Get Python version
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-python-version.outputs.version }}
@@ -14,11 +15,7 @@ jobs:
       - name: Extract Python Version from Dockerfile
         id: get-python-version
         run: |
-          echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT"
-          if [ $? -ne 0 ]; then
-            echo "Failed to extract python version from Dockerfile"
-            exit -1
-          fi
+          echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT" || exit -1
 
   debug_info:
     name: Debug info
