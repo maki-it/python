@@ -2,8 +2,6 @@ name: Build Python Image
 run-name: ${{ github.actor }} builds new python docker image
 on:
   push:
-    tags:
-      - '*'
     branches:
       - main
 
@@ -77,3 +75,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ steps.meta.outputs.tags }}
+            cache-from: type=gha
+            cache-to: type=gha,mode=max
