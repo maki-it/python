@@ -15,7 +15,7 @@ jobs:
         id: get-python-version
         run: |
           echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT"
-          if [ %? -ne 0 ]; then
+          if [ $? -ne 0 ]; then
             echo "Failed to extract python version from Dockerfile"
             exit -1
           fi
