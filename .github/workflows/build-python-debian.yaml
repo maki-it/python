@@ -15,12 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract Python Version from Dockerfile
-        id: get-python-version
-        shell: bash
-        run: |
-          echo "PYTHON_VERSION=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile || exit -1)" >> "$GITHUB_ENV"
-
       - name: Print github context JSON
         run: |
           cat <<EOF
@@ -36,6 +30,17 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Extract Python Version from Dockerfile
+        id: get-python-version
+        shell: bash
+        run: |
+          if [[ $(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile) =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
+            echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
+            echo "PATCH=${BASH_REMATCH[3]}" >> $GITHUB_ENV
+            echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+          fi
+
       - name: Extract metadata for the Docker image
         id: meta
         uses: docker/metadata-action@v5
@@ -47,11 +52,10 @@ jobs:
             latest=auto
           tags: |
             type=raw,value=debian
-            type=ref,event=branch,prefix=debian-
-            type=ref,event=pr,prefix=debian-
-            type=semver,pattern={{version}},prefix=debian-
-            type=semver,pattern={{major}}.{{minor}},prefix=debian-
-            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/0.') }},prefix=debian-
+            type=raw,value=${{ env.MAJOR }}
+            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
+            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
+            type=raw,value=${{ env.VERSION }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
