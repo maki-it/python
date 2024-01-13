@@ -15,15 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Print github context JSON
-        run: |
-          cat <<EOF
-          ${{ toJson(github) }}
-          EOF
-      - name: Print environment variables
-        run: |
-          env
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -52,10 +43,7 @@ jobs:
             latest=auto
           tags: |
             type=raw,value=debian
-            type=raw,value=${{ env.MAJOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
-            type=raw,value=${{ env.VERSION }}
+            type=semver,pattern=debian-{{version}},value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
