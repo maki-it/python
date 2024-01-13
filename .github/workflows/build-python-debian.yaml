@@ -29,7 +29,7 @@ jobs:
             echo "MAJOR=${BASH_REMATCH[1]}" >> $GITHUB_ENV
             echo "MINOR=${BASH_REMATCH[2]}" >> $GITHUB_ENV
             echo "PATCH=${BASH_REMATCH[3]}" >> $GITHUB_ENV
-            echo "VERSION=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
+            echo "SEMVER=$MAJOR.$MINOR.$PATCH" >> $GITHUB_ENV
           fi
 
       - name: Extract metadata for the Docker image
@@ -41,9 +41,13 @@ jobs:
 
           flavor: |
             latest=auto
+            prefix=debian
           tags: |
-            type=raw,value=debian
-            type=semver,pattern=debian-{{version}},value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
+            type=raw,value=latest
+            type=raw,value=${{ env.MAJOR }}
+            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
+            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
+            type=semver,pattern={{version}},value=${{ env.SEMVER }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
