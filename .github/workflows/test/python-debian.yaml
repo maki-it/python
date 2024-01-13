@@ -1,5 +1,5 @@
 name: Test Python Image
-run-name: ${{ gitea.actor }} tests new python docker image
+run-name: ${{ github.actor }} tests new python docker image
 on:
   pull_request:
     types:
@@ -12,12 +12,12 @@ on:
       - README.md
       - .gitignore
       - .editorconfig
-      #- .gitea/**
+      #- .github/**
       - .vscode/**
 
 jobs:
   test:
-    runs-on: ubuntu-docker
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,12 +27,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          config-inline: |
-            [registry."git.prod.maki-it.de"]            
-
-      - name: Login to Gitea Container Registry
-        run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de     
 
       - name: Build local Docker image
         uses: docker/build-push-action@v5
