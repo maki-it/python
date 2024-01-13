@@ -1,5 +1,5 @@
 name: Build Python Image
-run-name: ${{ gitea.actor }} builds new python docker image
+run-name: ${{ github.actor }} builds new python docker image
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
       - README.md
       - .gitignore
       - .editorconfig
-      #- .gitea/**
+      #- .github/**
       - .vscode/**
   # pull_request:
   #   branches:
@@ -28,18 +28,12 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        with:
-          config-inline: |
-            [registry."git.prod.maki-it.de"]
-
-      - name: Login to Gitea Container Registry
-        run: docker login --username $CI_USER --password $CI_TOKEN git.prod.maki-it.de
 
       - name: Extract metadata for the Docker image
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: git.prod.maki-it.de/${{ gitea.repository }}
+          images: git.prod.maki-it.de/${{ github.repository }}
           flavor: |
             latest=auto
           tags: |
@@ -48,7 +42,7 @@ jobs:
             type=ref,event=pr,prefix=debian-
             type=semver,pattern={{version}},prefix=debian-
             type=semver,pattern={{major}}.{{minor}},prefix=debian-
-            type=semver,pattern={{major}},enable=${{ !startsWith(gitea.ref, 'refs/tags/0.') }},prefix=debian-
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/0.') }},prefix=debian-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -56,14 +50,14 @@ jobs:
           context: .
           file: ./debian.Dockerfile
           build-args: |
-            BASE_NAME=${{gitea.repository}}:debian
+            BASE_NAME=${{github.repository}}:debian
             BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
             VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
             REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
-            SOURCE_URL=${{ gitea.server_url }}/${{ gitea.repository }}
+            SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
           platforms: |
             linux/amd64
-            linux/arm64  
-          push: ${{ gitea.event_name != 'pull_request' }}
+            linux/arm64
+          push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ${{ steps.meta.outputs.tags }}
