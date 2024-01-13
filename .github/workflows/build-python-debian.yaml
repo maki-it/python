@@ -50,16 +50,15 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}
+            ${{ env.REGISTRY }}/maki-it/python
 
           flavor: |
-            latest=auto
-            prefix=debian-
+            latest=true,
           tags: |
-            type=raw,value=latest
-            type=raw,value=${{ env.MAJOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}
-            type=raw,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
+            type=raw,value=debian
+            type=raw,prefix=debian-,value=${{ env.MAJOR }}
+            type=raw,prefix=debian-,value=${{ env.MAJOR }}.${{ env.MINOR }}
+            type=raw,prefix=debian-,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
