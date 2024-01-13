@@ -10,7 +10,7 @@ Docker Python base image
 
 | Distro 	| Image               	|
 |--------	|--------------------	|
-| Debian 	| [ghcr.io/maki-it/python:debian](https://github.com/orgs/maki-it/packages?repo_name=python-base-image) 	|
+| Debian 	| [ghcr.io/maki-it/python:debian](https://github.com/maki-it/python/pkgs/container/python) 	|
 
 # Non-root User
 This image runs with a non-root User:
