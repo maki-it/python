@@ -6,25 +6,19 @@ on:
       - main
 
 jobs:
-  get_python_version:
-    name: Get Python version
+  build:
+    name: Build and push Docker image
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.get-python-version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Extract Python Version from Dockerfile
         id: get-python-version
         shell: bash
         run: |
-          ls -l
-          echo "version=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile)" >> "$GITHUB_OUTPUT" || exit -1
+          echo "PYTHON_VERSION=$(grep -oP '(?<=^FROM python:)[0-9.]*' debian.Dockerfile || exit -1)" >> "$GITHUB_ENV"
 
-  debug_info:
-    name: Debug info
-    runs-on: ubuntu-22.04
-    needs: [get_python_version]
-    steps:
       - name: Print github context JSON
         run: |
           cat <<EOF
@@ -33,14 +27,6 @@ jobs:
       - name: Print environment variables
         run: |
           env
-
-  build:
-    name: Build and push Docker image
-    runs-on: ubuntu-latest
-    needs: [get_python_version]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
