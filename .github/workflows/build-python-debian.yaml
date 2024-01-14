@@ -60,12 +60,23 @@ jobs:
         with:
           context: .
           file: ./debian.Dockerfile
-          build-args: |
-            BASE_NAME=${{github.repository}}:debian
-            BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
-            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
-            REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
-            SOURCE_URL=${{ github.server_url }}/${{ github.repository }}
+          annotations: |
+            org.opencontainers.image.base.title="Python ${{ env.SEMVER }} on Debian"
+            org.opencontainers.image.base.description="Python ${{ env.SEMVER }} on Debian with non-root user"
+            org.opencontainers.image.base.authors="Maki IT <kontakt@maki-it.de>"
+            org.opencontainers.image.base.version="${{ env.SEMVER }}"
+            org.opencontainers.image.base.revision=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            org.opencontainers.image.base.created="${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}"
+            org.opencontainers.image.base.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.base.name="${{github.repository}}:debian"
+            org.opencontainers.image.title="Python ${{ env.SEMVER }} on Debian"
+            org.opencontainers.image.description="Python ${{ env.SEMVER }} on Debian with non-root user"
+            org.opencontainers.image.authors="Maki IT <kontakt@maki-it.de>"
+            org.opencontainers.image.version="${{ env.SEMVER }}"
+            org.opencontainers.image.revision=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+            org.opencontainers.image.created="${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}"
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.name="${{github.repository}}:debian"
           platforms: |
             linux/amd64
             linux/arm64
