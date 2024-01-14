@@ -10,6 +10,10 @@
 | ------ | ---------------------------------------------------------------------------------------- |
 | Debian | [ghcr.io/maki-it/python:debian](https://github.com/maki-it/python/pkgs/container/python) |
 
+## Usage in Github Actions
+
+To use in Github Actions, either authenticate to ghcr.io with your Github PAT (`secrets.GITHUB_TOKEN` is not enough) or [add Actions access in the package settings](https://github.com/orgs/maki-it/packages/container/python/settings).
+
 ## Non-root User
 
 This image runs with a non-root User:
