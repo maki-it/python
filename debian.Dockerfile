@@ -32,6 +32,24 @@ ARG BASE_NAME \
 # Must be in own ARG for use with arg variable
 ARG USER_GID=${USER_UID}
 
+LABEL de.maki-it.image.base.title="Python ${PYTHON_VERSION} on Debian" \
+      de.maki-it.image.base.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
+      de.maki-it.image.base.authors="Maki IT <kontakt@maki-it.de>" \
+      de.maki-it.image.base.version="${PYTHON_VERSION}" \
+      de.maki-it.image.base.revision=${REVISION} \
+      de.maki-it.image.base.created=${BUILDTIME} \
+      de.maki-it.image.base.source=${SOURCE_URL} \
+      de.maki-it.image.base.name=${BASE_NAME} \
+      # Will be overwritten by child image
+      de.maki-it.image.title="Python ${PYTHON_VERSION} on Debian" \
+      de.maki-it.image.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
+      de.maki-it.image.authors="Maki IT <kontakt@maki-it.de>" \
+      de.maki-it.image.version="${PYTHON_VERSION}" \
+      de.maki-it.image.revision=${REVISION} \
+      de.maki-it.image.created=${BUILDTIME} \
+      de.maki-it.image.source=${SOURCE_URL} \
+      de.maki-it.image.name=${BASE_NAME}
+
 WORKDIR ${APP_DIR}
 
 COPY --from=python-deps /install /usr/local
