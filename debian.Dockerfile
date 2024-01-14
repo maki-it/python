@@ -28,18 +28,18 @@ ARG BASE_NAME \
     BUILDTIME \
     REVISION \
     SOURCE_URL
-    
+
 # Must be in own ARG for use with arg variable
 ARG USER_GID=${USER_UID}
 
-LABEL de.maki-it.image.base.title="Python ${PYTHON_VERSION} on Debian" \
-      de.maki-it.image.base.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
-      de.maki-it.image.base.authors="Maki IT <kontakt@maki-it.de>" \
-      de.maki-it.image.base.version="${PYTHON_VERSION}" \
-      de.maki-it.image.base.revision=${REVISION} \
-      de.maki-it.image.base.created=${BUILDTIME} \
-      de.maki-it.image.base.source=${SOURCE_URL} \ 
-      de.maki-it.image.base.name=${BASE_NAME}
+LABEL org.opencontainers.image.base.title="Python ${PYTHON_VERSION} on Debian" \
+      org.opencontainers.image.base.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
+      org.opencontainers.image.base.authors="Maki IT <kontakt@maki-it.de>" \
+      org.opencontainers.image.base.version="${PYTHON_VERSION}" \
+      org.opencontainers.image.base.revision=${REVISION} \
+      org.opencontainers.image.base.created=${BUILDTIME} \
+      org.opencontainers.image.base.source=${SOURCE_URL} \
+      org.opencontainers.image.base.name=${BASE_NAME}
 
 WORKDIR ${APP_DIR}
 
@@ -51,7 +51,7 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} &&  \
     apt-get update && \
     apt-get install -y curl && \
     rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
-    
+
     # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
     #apt-get update && \
     #&& apt-get install -y sudo \
