@@ -55,6 +55,13 @@ jobs:
             type=raw,prefix=debian-,value=${{ env.MAJOR }}.${{ env.MINOR }}
             type=raw,prefix=debian-,value=${{ env.MAJOR }}.${{ env.MINOR }}.${{ env.PATCH }}
 
+      - name: Debug metadata
+        run: |
+          echo "Image: ${{ steps.meta.outputs.json }}"
+          echo "Tags: ${{ steps.meta.outputs.tags }}"
+          echo "Labels: ${{ steps.meta.outputs.labels }}"
+          echo "Test. "${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}""
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
