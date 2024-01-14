@@ -39,7 +39,16 @@ LABEL org.opencontainers.image.base.title="Python ${PYTHON_VERSION} on Debian" \
       org.opencontainers.image.base.revision=${REVISION} \
       org.opencontainers.image.base.created=${BUILDTIME} \
       org.opencontainers.image.base.source=${SOURCE_URL} \
-      org.opencontainers.image.base.name=${BASE_NAME}
+      org.opencontainers.image.base.name=${BASE_NAME} \
+      # Will be overwritten by child image
+      org.opencontainers.image.title="Python ${PYTHON_VERSION} on Debian" \
+      org.opencontainers.image.description="Python ${PYTHON_VERSION} on Debian with non-root user" \
+      org.opencontainers.image.authors="Maki IT <kontakt@maki-it.de>" \
+      org.opencontainers.image.version="${PYTHON_VERSION}" \
+      org.opencontainers.image.revision=${REVISION} \
+      org.opencontainers.image.created=${BUILDTIME} \
+      org.opencontainers.image.source=${SOURCE_URL} \
+      org.opencontainers.image.name=${BASE_NAME}
 
 WORKDIR ${APP_DIR}
 
