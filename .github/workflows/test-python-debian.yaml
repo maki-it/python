@@ -2,12 +2,8 @@ name: Test Python Image
 run-name: ${{ github.actor }} tests new python docker image
 on:
   pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
     branches:
-      - 'main'
+      - main
     paths-ignore:
       - README.md
       - .gitignore
@@ -35,7 +31,10 @@ jobs:
           file: ./debian.Dockerfile
           load: true
           tags: test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Test Docker image
         run: |
-          docker run --rm test python -V 
+          docker run --rm test python --version
+          docker run --rm test pipenv --version
