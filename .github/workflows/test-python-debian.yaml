@@ -34,4 +34,4 @@ jobs:
 
       - name: Test Docker image
         run: |
-          docker run --rm test python --version && pipenv --version
+          docker run --rm test "python --version && pipenv --version"
