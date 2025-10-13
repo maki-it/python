@@ -1,4 +1,4 @@
-FROM python:3.13.7-slim as base
+FROM python:3.13.8-slim as base
 
 # PYTHONDONTWRITEBYTECODE: Prevents Python from writing pyc files to disc (equivalent to python -B option) -> https://docs.python.org/3/using/cmdline.html#cmdoption-B
 # PYTHONUNBUFFERED: Prevents Python from buffering stdout and stderr (equivalent to python -u -> https://docs.python.org/3/using/cmdline.html#cmdoption-u
